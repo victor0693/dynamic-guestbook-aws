@@ -1,0 +1,19 @@
+{
+  "name": "guestbook-app",
+  "version": "1.0.0",
+  "description": "A simple dynamic guestbook app built with Express and DynamoDB, deployed on AWS Elastic Beanstalk.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.606.0",
+    "@aws-sdk/lib-dynamodb": "^3.606.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guestbook — Dynamic AWS Demo</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Sign the Guestbook</h1>
+    <p class="sub">A dynamic site — every message below is read live from a DynamoDB database, not baked into a file.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <form action="/sign" method="POST" class="guest-form">
+    <label for="name">Your name</label>
+    <input type="text" id="name" name="name" maxlength="60" required>
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" maxlength="300" rows="3" required></textarea>
+
+    <button type="submit">Sign the guestbook</button>
+  </form>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <section class="entries">
+    <h2><%= entries.length %> <%= entries.length === 1 ? 'entry' : 'entries' %></h2>
+
+    <% if (entries.length === 0 && !error) { %>
+      <p class="empty">No one has signed yet — be the first.</p>
+    <% } %>
+
+    <% entries.forEach(function(entry) { %>
+      <article class="entry">
+        <div class="entry-head">
+          <strong><%= entry.name %></strong>
+          <time><%= new Date(entry.timestamp).toLocaleString() %></time>
+        </div>
+        <p><%= entry.message %></p>
+      </article>
+    <% }); %>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Built with Node.js + Express, data stored in Amazon DynamoDB, hosted on AWS Elastic Beanstalk.</p>
+</footer>
+
+</body>
+</html>
